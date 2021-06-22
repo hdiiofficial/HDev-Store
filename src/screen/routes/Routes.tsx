@@ -5,11 +5,12 @@ import ChooseAuth from '../auth/ChooseAuth/ChooseAuth';
 import SignUp from '../auth/SignUp/SignUp';
 import SignIn from '../auth/SignIn/SignIn';
 import ForgotPassword from '../auth/ForgotPassword/ForgotPassword';
+import EmailConfirmation from '../auth/ForgotPassword/EmailConfirmation';
 
 export default function Routes() {
   const Stack = createStackNavigator();
   return (
-    <Stack.Navigator initialRouteName={'OnBoarding'}>
+    <Stack.Navigator initialRouteName={'EmailConfirmation'}>
       <Stack.Screen
         name="OnBoarding"
         component={OnBoarding}
@@ -41,6 +42,13 @@ export default function Routes() {
       <Stack.Screen
         name="ForgotPassword"
         component={ForgotPassword}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="EmailConfirmation"
+        component={EmailConfirmation}
         options={{
           headerShown: false,
         }}

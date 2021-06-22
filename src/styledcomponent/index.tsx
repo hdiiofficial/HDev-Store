@@ -26,7 +26,16 @@ const ViewOnboarding = styled.View`
   align-items: center;
   background-color: white;
 `;
+const ModalContainer = styled.View`
+  width: 343px;
+  min-height: 173px;
+  background-color: white;
+  border-radius: 10px;
 
+  padding: 16px;
+  align-items: center;
+  max-height: 100%;
+`;
 const TextSmall = styled.Text`
   font-style: normal;
   font-weight: normal;
@@ -113,4 +122,5 @@ export {
   Gap,
   TextInputComponent,
   TextLink,
+  ModalContainer,
 };

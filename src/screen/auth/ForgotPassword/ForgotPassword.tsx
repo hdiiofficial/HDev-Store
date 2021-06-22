@@ -14,10 +14,7 @@ import {
   Theme,
 } from '../../../styledcomponent';
 
-import ButtonSocialMedia from '../../../components/complexs/ButtonSocialMedia/ButtonSocialMedia';
-
 export default function ForgotPassword({navigation}: {navigation: any}) {
-  const theme = Theme;
   return (
     <ContainerPages dir={'center'}>
       <ContainerIconHeader>
@@ -32,7 +29,7 @@ export default function ForgotPassword({navigation}: {navigation: any}) {
         <Gap height={24} />
         <TextInputComponent placeholder={'Email'} />
         <Gap height={15} />
-        <ButtonPrimary width={271} height={35}>
+        <ButtonPrimary width={271} height={35} onPress={()=>navigation.navigate("EmailConfirmation")}>
           <TextSmall color={'white'} weight={700}>
             Recover
           </TextSmall>
