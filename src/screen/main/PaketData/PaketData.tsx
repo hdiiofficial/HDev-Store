@@ -24,7 +24,7 @@ import {IC_DISCOUNT} from '../../../assets/icon';
 import {useFocusEffect} from '@react-navigation/core';
 export const ItemContext = React.createContext();
 export default function PaketData() {
-  const [state, setstate] = React.useState(false);
+  const [state, setstate] = React.useState(true);
   const reducer = (prevState, action) => {
     switch (action.type) {
       case 'ADD_ITEM':
