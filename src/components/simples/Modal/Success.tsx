@@ -1,6 +1,6 @@
 import {useNavigation} from '@react-navigation/core';
 import React, {useRef} from 'react';
-import {View, Text, Animated} from 'react-native';
+import {View, Text, Animated, Alert} from 'react-native';
 
 import {IC_SUCCESS} from '../../../assets/icon';
 import {
@@ -15,10 +15,11 @@ import {
 
 export default function Success() {
   const navigation = useNavigation();
+  console.log("ets")
 
   const ref = useRef(new Animated.Value(1000)).current;
   React.useEffect(() => {
-    var toValue = 50;
+    let toValue = 0;
     Animated.spring(ref, {
       toValue: toValue,
       velocity: 3,
@@ -36,7 +37,6 @@ export default function Success() {
           bottom: 0,
           left: 0,
           right: 0,
-          backgroundColor: '#FFFFFF',
         },
         {transform: [{translateY: ref}], useNativeDriver: true},
       ]}>
@@ -53,9 +53,7 @@ export default function Success() {
         <ButtonPrimary
           height={35}
           width={271}
-          onPress={() => {
-            navigation.navigate('SignIn');
-          }}>
+          onPress={() => navigation.navigate('SignIn')}>
           <TextSmall color={'white'} weight={700}>
             Back to Sign in
           </TextSmall>

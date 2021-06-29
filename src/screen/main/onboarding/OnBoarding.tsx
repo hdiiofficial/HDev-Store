@@ -1,10 +1,12 @@
 import React from 'react';
 import {IC_ONBOARD} from '../../../assets/icon';
+import Success from '../../../components/simples/Modal/Success';
 import {
   TextLarge,
   TextSmall,
   ViewOnboarding,
   ButtonPrimary,
+
 } from '../../../styledcomponent';
 
 export default function OnBoarding({navigation}: {navigation: any}) {
@@ -19,6 +21,7 @@ export default function OnBoarding({navigation}: {navigation: any}) {
         onPress={() => navigation.replace('ChooseAuth')}>
         <TextSmall color={'white'}>Next</TextSmall>
       </ButtonPrimary>
+
     </ViewOnboarding>
   );
 }

@@ -15,9 +15,11 @@ import {
 } from '../../../styledcomponent';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import ButtonSocialMedia from '../../../components/complexs/ButtonSocialMedia/ButtonSocialMedia';
+import {useNavigation} from '@react-navigation/core';
 
 export default function SignIn({navigation}: {navigation: any}) {
   const theme = Theme;
+
   return (
     <ContainerPages dir={'center'}>
       <ContainerIconHeader>
@@ -37,7 +39,10 @@ export default function SignIn({navigation}: {navigation: any}) {
         <Gap height={15} />
         <TextInputComponent placeholder={'Password'} />
         <Gap height={15} />
-        <ButtonPrimary width={271} height={35}>
+        <ButtonPrimary
+          width={271}
+          height={35}
+          onPress={() => navigation.navigate('Home')}>
           <TextSmall color={'white'} weight={700}>
             Sign In
           </TextSmall>

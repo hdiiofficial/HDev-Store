@@ -6,6 +6,7 @@ interface props {
   height: number;
   dir: String;
   weight: number;
+  size: number;
 }
 
 const Theme = {
@@ -38,19 +39,18 @@ const ModalContainer = styled.View`
 `;
 const TextSmall = styled.Text`
   font-style: normal;
-  font-weight: normal;
-  font-size: 12px;
-  line-height: 15px;
+  font-size: ${(props: props) =>
+    typeof props.size === 'undefined' ? 12 : props.size}px;
   color: ${(props: props) =>
     typeof props.color === 'undefined' ? 'black' : props.color};
   font-weight: ${(props: props) =>
-    typeof props.weight === 'undefined' ? '400' : props.weight}; ;
+    typeof props.weight === 'undefined' ? '400' : props.weight};
 `;
 const TextLarge = styled.Text`
   font-style: normal;
   font-weight: normal;
   font-size: 24px;
-  line-height: 30px;
+ 
   font-weight: ${props => props.weight};
   color: ${(props: props) =>
     typeof props.color === 'undefined' ? 'black' : props.color};
@@ -96,6 +96,7 @@ const Gap = styled.View``;
 const TextInputComponent = styled.TextInput`
   width: 271px;
   height: 35px;
+
   background-color: ${Theme.inputColor};
   border-radius: 5px;
   padding-horizontal: 16px;
@@ -108,6 +109,14 @@ const TextLink = styled.Text`
   color: ${Theme.textLink};
   font-weight: 500;
   text-decoration: underline;
+`;
+const ContainerHomeHeader = styled.View`
+  background-color: ${Theme.buttonPrimary};
+  width: 100%;
+  height: 202px;
+  border-bottom-end-radius: 15px;
+  border-bottom-start-radius: 15px;
+  
 `;
 export {
   ContainerPages,
@@ -123,4 +132,5 @@ export {
   TextInputComponent,
   TextLink,
   ModalContainer,
+  ContainerHomeHeader,
 };

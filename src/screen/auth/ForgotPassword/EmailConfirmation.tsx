@@ -1,5 +1,5 @@
+import {useFocusEffect} from '@react-navigation/core';
 import React, {useState, useEffect} from 'react';
-import {TextInput} from 'react-native';
 import Loading from '../../../components/simples/Loading/Loading';
 import Success from '../../../components/simples/Modal/Success';
 import {
@@ -20,12 +20,17 @@ export default function EmailConfirmation({navigation}: {navigation: any}) {
   const [confPassword, setConfPassword] = useState('');
   const [modal, setmodal] = useState(false);
   const [loading, setloading] = useState(false);
-  useEffect(() => {
-    return () => {
-      setPassword('');
-      setConfPassword('');
-    };
-  }, []);
+
+  useFocusEffect(
+    React.useCallback(() => {
+      return () => {
+        setPassword('');
+        setConfPassword('');
+        setmodal(false);
+      };
+    }, []),
+  );
+
   const recover = () => {
     const checkLength = Validate(password) && Validate(confPassword);
     const checkSame = password === confPassword;
@@ -78,7 +83,7 @@ export default function EmailConfirmation({navigation}: {navigation: any}) {
               </TextSmall>
             </ButtonPrimary>
             <Gap height={16} />
-            {modal ? <Success /> : <></>}
+            {modal && <Success />}
           </ContainerContentSignUp>
         </ContainerPages>
       )}
