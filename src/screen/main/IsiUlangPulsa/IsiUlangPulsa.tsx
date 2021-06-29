@@ -25,7 +25,7 @@ import {useFocusEffect} from '@react-navigation/core';
 
 export const ItemContext = React.createContext();
 export default function IsiUlangPulsa() {
-  const [state, setstate] = React.useState(false);
+  const [state, setstate] = React.useState(true);
   const reducer = (prevState, action) => {
     switch (action.type) {
       case 'ADD_ITEM':
@@ -38,7 +38,7 @@ export default function IsiUlangPulsa() {
   };
 
   const [data, dispatch] = React.useReducer(reducer, {
-    item: 0,
+    item: null,
     turn: false,
   });
   const memoFunction = React.useMemo(
@@ -52,6 +52,7 @@ export default function IsiUlangPulsa() {
   );
   useFocusEffect(
     React.useCallback(() => {
+
       return () => {
         memoFunction.addItem(null);
         setstate(true);
