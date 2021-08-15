@@ -4,6 +4,10 @@ import android.app.Application;
 import android.content.Context;
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
+import io.invertase.firebase.firestore.ReactNativeFirebaseFirestorePackage;
+import io.invertase.firebase.auth.ReactNativeFirebaseAuthPackage;
+import io.invertase.firebase.app.ReactNativeFirebaseAppPackage;
+import com.microsoft.codepush.react.CodePush;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.facebook.react.ReactInstanceManager;
 import com.facebook.react.ReactNativeHost;
@@ -33,6 +37,10 @@ public class MainApplication extends Application implements ReactApplication {
         @Override
         protected String getJSMainModuleName() {
           return "index";
+        }
+          @Override
+        protected String getJSBundleFile() {
+            return CodePush.getJSBundleFile();
         }
       };
 

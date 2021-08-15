@@ -50,7 +50,7 @@ const TextLarge = styled.Text`
   font-style: normal;
   font-weight: normal;
   font-size: 24px;
- 
+
   font-weight: ${props => props.weight};
   color: ${(props: props) =>
     typeof props.color === 'undefined' ? 'black' : props.color};
@@ -96,9 +96,9 @@ const Gap = styled.View``;
 const TextInputComponent = styled.TextInput`
   width: 271px;
   height: 35px;
-
   background-color: ${Theme.inputColor};
   border-radius: 5px;
+  color: black;
   padding-horizontal: 16px;
 `;
 const TextLink = styled.Text`
@@ -116,7 +116,6 @@ const ContainerHomeHeader = styled.View`
   height: 202px;
   border-bottom-end-radius: 15px;
   border-bottom-start-radius: 15px;
-  
 `;
 export {
   ContainerPages,

@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "186973897134",
+    "firebase_url": "https://madava-project-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "madava-project",
+    "storage_bucket": "madava-project.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:186973897134:android:d69e33399c7dc3905bc83f",
+        "android_client_info": {
+          "package_name": "com.madava"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "186973897134-kqq0t0ovtfekeq30rai9j6hfbg5ip77j.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.madava",
+            "certificate_hash": "30f5081c99248f5ca22a8cdf640ace75b6bd072b"
+          }
+        },
+        {
+          "client_id": "186973897134-7ega9ku565irete04cp4bkopp3v7u5ia.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBwD1uRQ2ZeQdqAbmSLVtzPm4BtHAEIUcQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "186973897134-7ega9ku565irete04cp4bkopp3v7u5ia.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "186973897134-p63tel7kmjrvvvaqm8vpdgn2ffch2h95.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.reactjs.native.example.Madava"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,6 +1,6 @@
 import {useNavigation} from '@react-navigation/core';
 import React from 'react';
-import {View, Text, TouchableOpacity} from 'react-native';
+import {View, Text, TouchableOpacity, Pressable} from 'react-native';
 import Svg, {
   Circle,
   ClipPath,
@@ -23,7 +23,7 @@ const RenderItem = ({item}) => {
         alignItems: 'center',
         marginVertical: 12,
       }}>
-      <TouchableOpacity
+      <Pressable
         style={{
           width: 61,
           height: 61,
@@ -67,7 +67,7 @@ const RenderItem = ({item}) => {
           }}>
           {item.image()}
         </Gap>
-      </TouchableOpacity>
+      </Pressable>
       <TextSmall
         size={8}
         style={{width: 50, textAlign: 'center', marginTop: 8}}>

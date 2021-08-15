@@ -17,6 +17,9 @@ import IC_MENU_TELKOM_PAY from './ic_menu_telkom_pay.svg';
 import IC_MENU_VOUCHER from './ic_menu_voucher.svg';
 import IC_MENU_WALLET from './ic_menu_wallet.svg';
 import IC_DISCOUNT from './ic_discount.svg';
+import IC_WALLET from './ic_wallet.svg';
+import IC_VECTOR_CARD from './Vector.svg';
+import IC_VECTOR_CARD_BOTTOM from './Vector-1.svg';
 
 export {
   IC_ONBOARD,
@@ -38,4 +41,7 @@ export {
   IC_MENU_VOUCHER,
   IC_MENU_WALLET,
   IC_DISCOUNT,
+  IC_WALLET,
+  IC_VECTOR_CARD,
+  IC_VECTOR_CARD_BOTTOM,
 };

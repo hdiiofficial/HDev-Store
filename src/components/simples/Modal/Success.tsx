@@ -15,7 +15,7 @@ import {
 
 export default function Success() {
   const navigation = useNavigation();
-  console.log("ets")
+
 
   const ref = useRef(new Animated.Value(1000)).current;
   React.useEffect(() => {

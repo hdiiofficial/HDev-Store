@@ -9,11 +9,14 @@ import {
   Text,
   View,
 } from 'react-native';
+import CodePush from 'react-native-code-push';
 import OnBoarding from './src/screen/main/onboarding/OnBoarding';
-import Routes from './src/screen/routes/Routes';
+import Routes from './src/routes/Routes';
 import {Theme} from './src/styledcomponent';
+import FlashMessage from 'react-native-flash-message';
+export const ChangeColorStatusBarContext = React.createContext();
 
-const MyStatusBar = ({backgroundColor, ...props}) => (
+export const MyStatusBar = ({backgroundColor, ...props}) => (
   <View style={[styles.statusBar, {backgroundColor}]}>
     <SafeAreaView>
       <StatusBar
@@ -25,17 +28,40 @@ const MyStatusBar = ({backgroundColor, ...props}) => (
   </View>
 );
 
-export default function App() {
-  StatusBar.setBarStyle('dark-content', true);
+function App() {
+  const reducer = (prevState, action) => {
+    switch (action.type) {
+      case 'CHANGE_BACKGROUND':
+        return {
+          ...prevState,
+          background: action.background,
+        };
+    }
+  };
+  const [state, dispatch] = React.useReducer(reducer, {
+    background: Theme.buttonPrimary,
+  });
+  const memoFunction = React.useMemo(
+    () => ({
+      changeBackground: background => {
+        dispatch({type: 'CHANGE_BACKGROUND', background: background});
+      },
+    }),
+    [],
+  );
+
   return (
     <NavigationContainer>
-      <MyStatusBar
-        backgroundColor={Theme.buttonPrimary}
-        barStyle="light-content"
-      />
-      <SafeAreaView style={{flex: 1}}>
-        <Routes />
-      </SafeAreaView>
+      <ChangeColorStatusBarContext.Provider value={memoFunction}>
+        <MyStatusBar
+          backgroundColor={state.background}
+          barStyle="light-content"
+        />
+        <SafeAreaView style={{flex: 1}}>
+          <Routes />
+        </SafeAreaView>
+      </ChangeColorStatusBarContext.Provider>
+      <FlashMessage position={'top'} />
     </NavigationContainer>
   );
 }
@@ -46,3 +72,5 @@ const styles = StyleSheet.create({
     backgroundColor: 'black',
   },
 });
+
+export default CodePush(App);

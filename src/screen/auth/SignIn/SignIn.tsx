@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import {
   ButtonPrimary,
@@ -11,15 +11,19 @@ import {
   TextLarge,
   TextLink,
   TextSmall,
-  Theme,
 } from '../../../styledcomponent';
-import Icon from 'react-native-vector-icons/FontAwesome';
+
 import ButtonSocialMedia from '../../../components/complexs/ButtonSocialMedia/ButtonSocialMedia';
-import {useNavigation} from '@react-navigation/core';
+import {TextInput} from 'react-native-gesture-handler';
+import {RouterContext} from '../../../routes/Routes';
 
 export default function SignIn({navigation}: {navigation: any}) {
-  const theme = Theme;
-
+  const {signInMemo} = React.useContext(RouterContext);
+  const [name, setname] = useState('');
+  const [password, setpassword] = useState('');
+  const signInMethod = () => {
+    signInMemo(name, password);
+  };
   return (
     <ContainerPages dir={'center'}>
       <ContainerIconHeader>
@@ -34,15 +38,20 @@ export default function SignIn({navigation}: {navigation: any}) {
           Sign In to <TextSmall weight={500}>Madava App</TextSmall>
         </TextSmall>
         <Gap height={24} />
-
-        <TextInputComponent placeholder={'Account Name'} />
+        <TextInputComponent
+          placeholder={'Account Name'}
+          autoCapitalize={'none'}
+          onChangeText={val => setname(val)}
+        />
         <Gap height={15} />
-        <TextInputComponent placeholder={'Password'} />
+        <TextInputComponent
+          placeholder={'Password'}
+          autoCapitalize={'none'}
+          secureTextEntry={true}
+          onChangeText={val => setpassword(val)}
+        />
         <Gap height={15} />
-        <ButtonPrimary
-          width={271}
-          height={35}
-          onPress={() => navigation.navigate('Home')}>
+        <ButtonPrimary width={271} height={35} onPress={signInMethod}>
           <TextSmall color={'white'} weight={700}>
             Sign In
           </TextSmall>

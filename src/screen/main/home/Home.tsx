@@ -5,6 +5,7 @@ import {
   Image,
   StyleSheet,
   Text,
+  TextInput,
   TouchableOpacity,
   View,
 } from 'react-native';
@@ -29,9 +30,10 @@ import {
 
 import SkeletonPlaceholder from 'react-native-skeleton-placeholder';
 import {ItemMenu} from './ItemMenu';
-import MainContent from './MainContent';
+import MainContent, {MainContentMemo} from './MainContent';
 import {Easing} from 'react-native-reanimated';
-
+import {useFocusEffect} from '@react-navigation/core';
+import {currentUser} from '../../../utils/firebase/firebase';
 const data = [
   {
     color: '#F3705A',
@@ -65,8 +67,16 @@ const data = [
     text: 'Pembayaran Telkom/Indihome',
   },
 ];
+const Header = () => {
+  const [search, setsearch] = React.useState<String>('');
 
-const Header = React.memo(() => {
+  useFocusEffect(
+    React.useCallback(() => {
+      return () => {
+        setsearch('');
+      };
+    }, []),
+  );
   return (
     <>
       <ContainerHomeHeader>
@@ -99,6 +109,10 @@ const Header = React.memo(() => {
           <TextInputComponent
             style={styles.searchContainer}
             placeholder={'Search for...'}
+            onChangeText={value => {
+              setsearch(value);
+            }}
+            value={search}
           />
         </Gap>
       </ContainerHomeHeader>
@@ -112,11 +126,21 @@ const Header = React.memo(() => {
           style={[styles.flatListStyle]}
           contentContainerStyle={[styles.containerFlatlist]}
           scrollEnabled={false}
+          initialNumToRender={6} // Reduce initial render amount
+          maxToRenderPerBatch={1} // Reduce number in each render batch
+          updateCellsBatchingPeriod={100} // Increase time between renders
+          windowSize={1}
+          getItemLayout={(data, index) => ({
+            length: 113,
+            offset: 113 * index,
+            index,
+          })}
         />
       </Gap>
     </>
   );
-});
+};
+const HeaderMemo = React.memo(Header);
 
 export default function Home() {
   const ref = React.useRef(new Animated.Value(0)).current;
@@ -129,14 +153,10 @@ export default function Home() {
     <ContainerPages dir={'flex-start'}>
       <Animated.FlatList
         data={['Important Notice', 'Ongoing Promos', 'News', 'Lifestyle']}
-        renderItem={({item}) => (
-          <>
-            <MainContent item={item} />
-          </>
-        )}
+        renderItem={({item}) => <>{/* <MainContentMemo item={item} /> */}</>}
         keyExtractor={item => item}
         key={(item, index) => item + index}
-        ListHeaderComponent={() => <Header />}
+        ListHeaderComponent={() => <HeaderMemo />}
         onScroll={Animated.event([{nativeEvent: {contentOffset: {y: ref}}}], {
           useNativeDriver: true,
         })}
@@ -147,13 +167,39 @@ export default function Home() {
             <Gap height={100} />
           </>
         )}
+        initialNumToRender={4}
+        maxToRenderPerBatch={1}
+        getItemLayout={(data, index) => ({
+          length: 157,
+          offset: 157 * index,
+          index,
+        })}
+        windowSize={1}
+        scrollEventThrottle={8}
       />
-
       <FooterMemo opacity={headerDistance} />
     </ContainerPages>
   );
 }
 const Footer = ({opacity}) => {
+  const [json, setjson] = useState({
+    displayName: '',
+    phone: '',
+    house: '',
+  });
+  const test = async () => {
+    const res = await currentUser();
+    setjson({
+      displayName: res?.displayName,
+      phone: res?.phoneNumber,
+    });
+  };
+
+  useFocusEffect(
+    React.useCallback(() => {
+      test();
+    }, []),
+  );
   return (
     <Animated.View
       style={{
@@ -192,11 +238,11 @@ const Footer = ({opacity}) => {
           }}
         />
         <Gap style={{marginStart: 16}}>
-          <TextLarge weight={500} style={{fontSize: 14, lineHeight: 0}}>
-            Hi, Mr. Gopal
+          <TextLarge weight={500} style={{fontSize: 14, width: 100}}>
+            Hi, {json.displayName}
           </TextLarge>
           <TextSmall style={{width: 180}}>
-            Kluster Kaliska Blok A1 No. 5 0895-1234-5670
+            Kluster Kaliska Blok A1 No. 5 {json.phone}
           </TextSmall>
         </Gap>
       </Gap>
@@ -218,7 +264,6 @@ const styles = StyleSheet.create({
   textTitle: {
     textAlign: 'center',
     alignItems: 'center',
-
     width: '100%',
   },
   container: {
